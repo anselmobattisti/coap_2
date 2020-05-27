@@ -32,7 +32,9 @@ Outro recurso que foi automaticamente criado foi o /atuador
 
 3 - Rode o atuador (na mesma vm onde está o SensHat)
 
->> python atuador.py 192.168.0.150 568
+>> python atuador.py 192.168.0.150 5683
+
+O atuador usa pooling
 
 Todos os leds devem ficar em branco
 
@@ -41,12 +43,16 @@ de um sensor específico e fará um post no /atuador que acenderá o led especí
 
 >> python app.py 192.168.0.150 5683 s1 10 10 10
 
+>> python app.py 192.168.0.150 5683 s2 20 20 20
+
 Parâmetros
 
 - s1 nome do recurso
 - 10 led que será acesso
 - 10 humidade
 - 10 temperatura
+
+O app usa observer
 
 5 - Precisamos inserir um valor no recurso s1 do CoaP Server, abra outro terminar e execute 
 
@@ -56,3 +62,5 @@ Parâmetros
 
 Veja que o led 10 acendeu e o 20 ficou apagado pois a temperatura de s2 é 10. Se mudar a temp de s2
 para 21 vai acender o led 20
+
+>> python sensor_simulator.py -o PUT -p coap://192.168.0.150:5683/s2 -P 21-30
