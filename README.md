@@ -1,3 +1,8 @@
+Diagram:
+----------------------
+
+![Alt text](img/v.png?raw=true "Diagram")
+
 Softwares necessários:
 ----------------------
 
@@ -32,6 +37,7 @@ Todos os leds devem ficar em branco
 # 10 temperatura
 # 10 led que será acesso
 
+<<<<<<< HEAD:Readme
 >> python app.py 192.168.0.150 5683 S2 20 20
 
 5 - Precisamos inserir um valor no recurso S1 do CoaP Server, abra outro terminar e execute 
@@ -42,3 +48,6 @@ Todos os leds devem ficar em branco
 
 Veja que o led 10 acendeu e o 20 ficou apagado pois a temperatura de S2 é 10. Se mudar a temp de S2
 para 21 vai acender o led 20
+=======
+Cada cliente está lendo o seu recurso específico no servidor Coap
+>>>>>>> db0054a97eb2557e048cdf03134850155fba5b77:README.md
