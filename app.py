@@ -26,15 +26,16 @@ led = sys.argv[5]
 client = HelperClient(server=(host, port))
 
 # callback do observer
-def sensor_set_new_value(response):  # pragma: no cover    
+def sensor_observer(response):
+    print 'Sensor Value Updated'
     global client
     global path_atudador   
     try:
         humidity = int(response.payload)
         if (humidity > h_lim):
-            response = client.post(path_atuador,led+"-1")
+            response = client.put(path_atuador,led+"-1")
         else:
-            response = client.post(path_atuador,led+"-0")
+            response = client.put(path_atuador,led+"-0")
     except:
         print('Humidity in not a number')
 
@@ -43,7 +44,7 @@ def main():  # pragma: no cover
     global client
 
     # quando der um PUT no path chama o observer
-    client.observe(path, sensor_set_new_value)
+    client.observe(path, sensor_observer)
 
 if __name__ == '__main__':  # pragma: no cover
     main()

@@ -158,8 +158,6 @@ def main():  # pragma: no cover
             print "Payload cannot be empty for a PUT request"
             usage()
             sys.exit(2)
-        print path
-        print payload
         response = client.put(path, payload)
         print response.pretty_print()
         client.stop()

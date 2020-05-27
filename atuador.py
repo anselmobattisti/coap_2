@@ -19,22 +19,28 @@ red = (255, 0, 0)
 white = (255, 255, 255)
 
 path = "coap://"+sys.argv[1]+":"+sys.argv[2]+"/atuador"
-host, port, path = parse_uri(path)
+host, port, path_atuador = parse_uri(path)
 
 pixels = [None]*64
 
 client = HelperClient(server=(host, port))
 
-print path
-
-while True:    
-    time.sleep(1)
-    response = client.get(path)  
+# callback do observer
+def atuador_observer(response):  # pragma: no cover
+    print 'Atuador Value Updated'
+    global client
+    response = client.get(path_atuador)
     for i in range(64):
         pixels[i] = white
         if response.payload[i] == "1":
             pixels[i] = red
-            
     sense.set_pixels(pixels)        
 
-client.stop()
+def main():  # pragma: no cover
+    global client  
+
+    # quando der um PUT no path do atuador chama o observer
+    client.observe(path_atuador, atuador_observer)
+
+if __name__ == '__main__':  # pragma: no cover
+    main()
