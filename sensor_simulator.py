@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Example of how to run the script
-# python sensor_simulator.py -o PUT -p coap://192.168.0.150:5683/s2 -P 0
+# python sensor_simulator.py -o PUT -p coap://192.168.0.150:5683/s2 -P 0-0
 # python sensor_simulator.py -o GET -p coap://127.0.0.1:5683/s2
 import getopt
 import socket
