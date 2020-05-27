@@ -41,10 +41,11 @@ def main():  # pragma: no cover
 
     while True:    
         time.sleep(1)
-        atuador_observer()
-        
-    # quando der um PUT no path do atuador chama o observer
-    # client.observe(path_atuador, atuador_observer)
+        atuador_observer()  
 
 if __name__ == '__main__':  # pragma: no cover
-    main()
+    try: 
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
+        

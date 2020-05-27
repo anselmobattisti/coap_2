@@ -51,4 +51,8 @@ def main():  # pragma: no cover
     client.observe(path, sensor_observer)
 
 if __name__ == '__main__':  # pragma: no cover
-    main()
+    try: 
+        main()
+    except KeyboardInterrupt:
+        print "sa"
+        sys.exit()
