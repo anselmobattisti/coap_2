@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-# python app.py 192.168.0.150 5683 s1 10 10
-# python app.py 192.168.0.150 5683 s2 20 20
+# python app.py 192.168.0.150 5683 s1 10 10 10
+# python app.py 192.168.0.150 5683 s2 20 20 20
 # 1 - CoaP server IP
 # 2 - CoaP port
 # 3 - Sensor ID, CoaP resource
 # 4 - Humidity Limit
+# 5 - Temp Limit
 
 import getopt
 import socket
@@ -18,10 +19,11 @@ path_atuador = "/atuador"
 
 # limite de temperatura
 h_lim = int(sys.argv[4])
+t_lim = int(sys.argv[5])
 
 path = "coap://"+sys.argv[1]+":"+sys.argv[2]+"/"+sys.argv[3]
 host, port, path = parse_uri(path)
-led = sys.argv[5]
+led = sys.argv[4]
 
 client = HelperClient(server=(host, port))
 
@@ -31,8 +33,10 @@ def sensor_observer(response):
     global client
     global path_atudador   
     try:
-        humidity = int(response.payload)
-        if (humidity > h_lim):
+        p = response.payload.split("-")
+        humidity = int(p[0])
+        temp = int(p[1])
+        if (humidity > h_lim and temp > t_lim):
             response = client.put(path_atuador,led+"-1")
         else:
             response = client.put(path_atuador,led+"-0")
