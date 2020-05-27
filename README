@@ -42,16 +42,3 @@ Os leds deverão ficar brancos
 >> python client.py s2 5
 
 Cada cliente está lendo o seu recurso específico no servidor Coap
-
-
-
-
-try:
-        humidity = int(response.payload)
-        for i in range(64):
-            pixels[i] = white
-        if (humidity > h_lim):
-            pixels[led] = red
-        sense.set_pixels(pixels)        
-    except:
-        print('Humidity is not defined or is not a number')
