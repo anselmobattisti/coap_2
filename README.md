@@ -3,6 +3,11 @@ Diagram:
 
 ![Alt text](img/v.png?raw=true "Diagram")
 
+Vídeo Explicativo:
+----------------------
+
+https://www.youtube.com/watch?v=2bBjCbVK9OM&t=98s
+
 Softwares necessários:
 ----------------------
 
