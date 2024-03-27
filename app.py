@@ -29,18 +29,22 @@ client = HelperClient(server=(host, port))
 
 # callback do observer
 def sensor_observer(response):
-    print 'Sensor Value Updated'
+    print('Sensor Value Updated')
     global client
     global path_atudador   
     try:
-        p = response.payload.split("-")
-        humidity = int(p[0])
-        temp = int(p[1])
-        if (humidity > h_lim and temp > t_lim):
-            response = client.put(path_atuador,led+"-1")
-        else:
-            response = client.put(path_atuador,led+"-0")
-    except:
+        if response.payload != None:
+            print(response.payload)
+            print("-----")            
+            p = response.payload.split("-")            
+            humidity = int(p[0])
+            temp = int(p[1])
+            if (humidity > h_lim and temp > t_lim):
+                response = client.put(path_atuador,led+"-1")
+            else:
+                response = client.put(path_atuador,led+"-0")
+    except NameError:
+        print(NameError)
         print('Humidity in not a number')
 
         
@@ -53,6 +57,5 @@ def main():  # pragma: no cover
 if __name__ == '__main__':  # pragma: no cover
     try: 
         main()
-    except KeyboardInterrupt:
-        print "sa"
+    except KeyboardInterrupt:        
         sys.exit()

@@ -27,7 +27,7 @@ client = HelperClient(server=(host, port))
 
 # callback do observer
 def atuador_observer():  # pragma: no cover
-    print 'Atuador Value Updated'
+    print("Atuador Value Updated")
     global client
     response = client.get(path_atuador)
     for i in range(64):
@@ -39,9 +39,9 @@ def atuador_observer():  # pragma: no cover
 def main():  # pragma: no cover
     global client  
 
-    while True:    
-        time.sleep(1)
+    while True:            
         atuador_observer()
+        time.sleep(5)
         
     # quando der um PUT no path do atuador chama o observer
     # client.observe(path_atuador, atuador_observer)

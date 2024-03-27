@@ -18,7 +18,7 @@ class Atuador(Resource):
     return newobj
 
   def render_POST(self, request):
-    print "post"
+    print("post")
     try:
       aux = request.payload.split("-")
       request.payload = self.payload
@@ -28,21 +28,21 @@ class Atuador(Resource):
       return seres      
     except:
         print('Error')
-        print request
+        print(request)
 
   def render_PUT(self, request):
-    print "update"
+    print("update")
     try:
       aux = request.payload.split("-")
       request.payload = self.payload
       i = int(aux[0])
       request.payload[i] = aux[1]
       self.edit_resource(request)
-      print request
+      print(request)
       return self
     except:
         print('Error')
-        print request
+        print(request)
 
 class Sensor(Resource):
   def __init__(self,name="Sensor",coap_server=None):
@@ -74,13 +74,13 @@ class CoAPServer(CoAP):
     CoAP.__init__(self,(host,port),multicast)
     self.add_resource('atuador/',Atuador())
     self.add_resource('s1/',Sensor())
-    print "CoAP server started on {}:{}".format(str(host),str(port))
-    print self.root.dump()
+    print("CoAP server started on {}:{}".format(str(host),str(port)))
+    print(self.root.dump())
 
 def pollUserInput(server):
   while 1:
-    user_input = raw_input("Add New Sensor: ")
-    print user_input
+    user_input = input("Add New Sensor: ")
+    print(user_input)
     server.add_resource(user_input, Sensor())
 
 def main():
@@ -95,9 +95,9 @@ def main():
 
   try:
     server.listen(10)
-    print "executed after listen"
+    print("executed after listen")
   except KeyboardInterrupt:
-    print server.root.dump()
+    print(server.root.dump())
     server.close()
     sys.exit()
 

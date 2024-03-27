@@ -1,0 +1,5 @@
+CoAPthon3
+sense-emu 
+manimce
+pycairo
+PyGObject

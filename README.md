@@ -1,71 +1,92 @@
-Diagram:
+# Diagram:
 ----------------------
 
 ![Alt text](img/v.png?raw=true "Diagram")
 
-Vídeo Explicativo:
+# Vídeo Explicativo:
 ----------------------
 
 https://www.youtube.com/watch?v=2bBjCbVK9OM&t=98s
 
-Softwares necessários:
+
+# Installation
 ----------------------
 
-1 - Python 2.7.16
+```shell
+# create the venv environment
+python3 -m venv venv
 
-2 - O Coap Server utilizado foi o CoAPthon versão 4.0.2
+# access the venv
+source venv/bin/activate
 
->> sudo pip install CoAPthon
+# install the packets
+pip install -r requirements.txt
 
-Como executar os testes:
+# leave the virtual environment
+deactivate
+```
+
+# Softwares necessários:
 ----------------------
 
-1 - Para rodar os testes primeiro é necessário estar com o SenseHat aberto 
+1 - Python 3.8
 
-2 - Rodar o Servidor Coap
+2 - libcairo2-dev e pkg-config python3-dev
 
->> python server.py 192.168.0.150 5683
+```shell
+sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev
+```
 
-Parâmetros
+# Como executar os testes:
+----------------------
 
-1 - 192.168.0.150 ip do servidor coap
-2 - 5683 porta
+1 - Rodar o Servidor Coap
 
-Aparecerá escrito "Add New Sensor", Digite o ID do sensor, por exmeplo s2; O ID do sensor s1 já foi criado por padrão
+```shell
+# Parâmetros
+# 1 - 192.168.0.113 ip do servidor coap
+# 2 - 5683 porta
 
-Outro recurso que foi automaticamente criado foi o /atuador
+python server.py 192.168.0.113 5683
+```
 
-3 - Rode o atuador (na mesma vm onde está o SensHat)
+Dois recursos foram automaticamente criados, o /s1 e o /atuador
 
->> python atuador.py 192.168.0.150 5683
+Aparecerá escrito "Add New Sensor", Digite o ID do sensor, por exmeplo s2
 
+3 - Rode o atuador
+
+```shell
+python atuador.py 192.168.0.113 5683
+```
 O atuador usa pooling
 
 Todos os leds devem ficar em branco
 
-4 -Em um outro terminal rode o script que será a aplicação que sabe quais são os limites
-de um sensor específico e fará um post no /atuador que acenderá o led específico
+4 -Em um outro terminal rode o script que será a aplicação que sabe quais são os limites de um sensor específico e fará um post no /atuador que acenderá o led específico
 
->> python app.py 192.168.0.150 5683 s1 10 10 10
+```shell
+# Parâmetros
 
->> python app.py 192.168.0.150 5683 s2 20 20 20
-
-Parâmetros
-
-- s1 nome do recurso
-- 10 led que será acesso
-- 10 humidade
-- 10 temperatura
+# - s1 nome do recurso
+# - 10 led que será acesso
+# - 10 humidade
+# - 10 temperatura
+python app.py 192.168.0.113 5683 s1 10 10 10
+```
 
 O app usa observer
 
 5 - Precisamos inserir um valor no recurso s1 do CoaP Server, abra outro terminar e execute 
 
->> python sensor_simulator.py -o PUT -p coap://192.168.0.150:5683/s1 -P 20-30
+```shell
+python sensor_simulator.py -o PUT -p coap://192.168.0.113:5683/s1 -P 20-30
 
->> python sensor_simulator.py -o PUT -p coap://192.168.0.150:5683/s2 -P 10-30
+python sensor_simulator.py -o PUT -p coap://192.168.0.150:5683/s2 -P 10-30
+```
 
-Veja que o led 10 acendeu e o 20 ficou apagado pois a temperatura de s2 é 10. Se mudar a temp de s2
-para 21 vai acender o led 20
+Veja que o led 10 acendeu e o 20 ficou apagado pois a temperatura de s2 é 10. Se mudar a temp de s2 para 21 vai acender o led 20
 
->> python sensor_simulator.py -o PUT -p coap://192.168.0.150:5683/s2 -P 21-30
+```shell
+python sensor_simulator.py -o PUT -p coap://192.168.0.150:5683/s2 -P 21-30
+```
