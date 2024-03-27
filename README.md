@@ -54,7 +54,7 @@ Dois recursos foram automaticamente criados, o /s1 e o /atuador
 
 Aparecerá escrito "Add New Sensor", Digite o ID do sensor, por exmeplo s2
 
-3 - Rode o atuador
+2 - Rode o atuador
 
 ```shell
 python atuador.py 192.168.0.113 5683
@@ -63,7 +63,7 @@ O atuador usa pooling
 
 Todos os leds devem ficar em branco
 
-4 -Em um outro terminal rode o script que será a aplicação que sabe quais são os limites de um sensor específico e fará um post no /atuador que acenderá o led específico
+3 -Em um outro terminal rode o script que será a aplicação que sabe quais são os limites de um sensor específico e fará um post no /atuador que acenderá o led específico
 
 ```shell
 # Parâmetros
@@ -77,7 +77,7 @@ python app.py 192.168.0.113 5683 s1 10 10 10
 
 O app usa observer
 
-5 - Precisamos inserir um valor no recurso s1 do CoaP Server, abra outro terminar e execute 
+4 - Precisamos inserir um valor no recurso s1 do CoaP Server, abra outro terminar e execute 
 
 ```shell
 python sensor_simulator.py -o PUT -p coap://192.168.0.113:5683/s1 -P 20-30
